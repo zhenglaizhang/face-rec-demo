@@ -9,7 +9,7 @@ import config
 
 
 def init_cascade():
-    return cv2.CascadeClassifier(config.haar_defaul_model_path)
+    return cv2.CascadeClassifier(config.haarcascade_frontalface_default_model_path)
 
 
 size = 4
