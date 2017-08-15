@@ -39,6 +39,7 @@ class CameraManager(object):
             self._capture_manager.write_image('screenshot.png')
         elif key_code == 9:  # tab
             if self._capture_manager.is_writing_video:
+                # add confirmation dialog?
                 self._capture_manager.stop_writing_video()
             else:
                 self._capture_manager.start_writing_video('screencast.avi')

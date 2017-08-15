@@ -1,6 +1,13 @@
 # Face Recognization is FUN
 
 
+## TODO
+
+- http://answers.opencv.org/question/5651/face-recognition-with-opencv-24x-accuracy/
+- https://github.com/bytefish/facerec
+- http://flothesof.github.io/smile-recognition.html
+- http://bytefish.de/blog/videofacerec/
+
 ## Dev Env Setup
 
 ```sh
