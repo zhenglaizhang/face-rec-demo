@@ -44,7 +44,7 @@ class CameraManager(object):
             else:
                 self._capture_manager.start_writing_video('screencast.avi')
         elif key_code == 27:  # escape
-            self._window_manager.destory_window()
+            self._window_manager.destroy_window()
 
 
 class CaptureManager(object):
@@ -174,8 +174,8 @@ class Cv2WindowManager(object):
     def show(self, frame):
         cv2.imshow(self._window_name, frame)
 
-    def destory_window(self):
-        cv2.destoryWindow(self._window_name)
+    def destroy_window(self):
+        cv2.destroyWindow(self._window_name)
         self._is_window_created = False
 
     def process_events(self):
