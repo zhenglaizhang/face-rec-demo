@@ -3,6 +3,49 @@ import time
 import numpy as np
 
 
+class CameraManager(object):
+    def __init__(self, name='Camera'):
+        self._window_manager = Cv2WindowManager(name, self.on_key_press)
+        self._capture_manager = CaptureManager(cv2.VideoCapture(0), self._window_manager, mirror=True)
+        self._filters = []
+
+    def run(self):
+        self._window_manager.create_window()
+        while self._window_manager.is_window_created:
+            self._capture_manager.enter_frame()
+            frame = self._capture_manager.frame
+
+            #  apply filters to the frame
+
+            # preprocessing
+
+            # sampling?
+
+            # detecting?
+
+            # recognizing ?
+
+            self._capture_manager.exit_frame()
+            self._window_manager.process_events()
+
+    def on_key_press(self, key_code):
+        """Handle a key press event
+        space       -> snapshot
+        tab         -> start/stop recording a screen cast
+        escape      -> quit
+        """
+        if key_code == 32:  # space
+            # todo
+            self._capture_manager.write_image('screenshot.png')
+        elif key_code == 9:  # tab
+            if self._capture_manager.is_writing_video:
+                self._capture_manager.stop_writing_video()
+            else:
+                self._capture_manager.start_writing_video('screencast.avi')
+        elif key_code == 27:  # escape
+            self._window_manager.destory_window()
+
+
 class CaptureManager(object):
     def __init__(self, camera, preview_window_manager=None, mirror=False):
         self.preview_window_manager = preview_window_manager
@@ -137,5 +180,5 @@ class Cv2WindowManager(object):
     def process_events(self):
         key_code = cv2.waitKey(1)
         if self._key_press_callback is not None and key_code != -1:
-            key_code &= 0xFF    # discard non-ASCII codes
+            key_code &= 0xFF  # discard non-ASCII codes
             self._key_press_callback(key_code)
