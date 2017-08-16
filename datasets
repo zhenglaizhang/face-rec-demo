@@ -6,10 +6,40 @@ import cv2
 import sys
 import os
 import config
+import logging
+import numpy as np
+import detectors
 
 
-def init_cascade():
-    return cv2.CascadeClassifier(config.haarcascade_frontalface_default_model_path)
+class DataSetReader(object):
+    def __init__(self, path, size=None):
+        self._path = path
+        self._size = size
+
+    def read(self):
+        c = 0
+        X, y, names = [], [], {}
+        for dirname, dirnames, filenames in os.walk(self._path):
+            for subdirname in dirnames:
+                subject_path = os.path.join(dirname, subdirname)
+                for filename in os.listdir(subject_path):
+                    try:
+                        im = cv2.imread(os.path.join(subject_path, filename), cv2.IMREAD_GRAYSCALE)
+                        if size is not None:
+                            im = cv2.resize(im, size)
+                        X.append(np.asarray(im, dtype=np.uint8))
+                        y.append(c)
+                    except IOError as err:
+                        logging.error(err)
+                    except:
+                        logging.error('Unexpected error:{}'.format(sys.exc_info()[0]))
+                        raise
+                names[c] = subdirname
+                c += 1
+        return [X, y]
+
+
+
 
 
 size = 4
@@ -27,7 +57,7 @@ if not os.path.isdir(path):
 im_width, im_height = 112, 92
 print(im_width)
 print(im_height)
-cascade = init_cascade()
+cascade = ()
 
 pin = sorted([int(n[:n.find('.')]) for n in os.listdir(path)
               if n[0] != '.'] + [0])[-1] + 1
