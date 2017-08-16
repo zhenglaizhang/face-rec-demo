@@ -22,8 +22,11 @@ class CameraManager(object):
             # sampling?
 
             # detecting?
+            # Face detection on videos is simply face detection applied to each frame read into the program from the camera.
 
             # recognizing ?
+
+            # not recognized, a FP or a new person (need run education process?)
 
             self._capture_manager.exit_frame()
             self._window_manager.process_events()

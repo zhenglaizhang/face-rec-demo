@@ -12,7 +12,8 @@
 - A proper validation should be applied.  
 - Figures is a must!.
 - Get as much data as possible, because **Data is king**.
-- Don't validate your algorithms on images taken in a very controlled scenario. 
+- Don't validate your algorithms on images taken in a very controlled scenario.
+- Apply [functional programming techniques](https://github.com/sfermigier/awesome-functional-python)
 
 
 ## Design
